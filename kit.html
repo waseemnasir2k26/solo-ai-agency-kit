@@ -3,14 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <title>The Solo AI Agency Kit — SkynetLabs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --ink: #0b0b0c;
-        --paper: #0e0f12;
-        --brass: #c9a23f;
-        --brass2: #e7c766;
-        --mut: #9aa0aa;
-        --line: rgba(255, 255, 255, 0.1);
+        --paper: #f2efe6;
+        --paper2: #ede8dc;
+        --ink: #1a1a1a;
+        --ink-mute: #56564f;
+        --ink-faint: #7a766c;
+        --terra: #c66b3f;
+        --terra-aa: #a8451f;
+        --gold: #b99657;
+        --rule: rgba(26, 26, 26, 0.13);
+        --display: "Bricolage Grotesque", system-ui, sans-serif;
+        --serif: "Fraunces", Georgia, serif;
+        --sans: "Inter", system-ui, sans-serif;
+        --mono: "IBM Plex Mono", monospace;
       }
       * {
         margin: 0;
@@ -22,9 +35,9 @@
         margin: 0;
       }
       body {
-        font-family: "Segoe UI", system-ui, Arial, sans-serif;
-        color: #eef0f3;
-        background: var(--ink);
+        font-family: var(--sans);
+        color: var(--ink);
+        background: var(--paper);
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
@@ -35,31 +48,45 @@
         position: relative;
         page-break-after: always;
         overflow: hidden;
-        background: radial-gradient(
-          120% 90% at 50% 0%,
-          #16181d 0%,
-          #0b0b0c 60%
-        );
+        background: var(--paper);
       }
       .page:last-child {
         page-break-after: auto;
+      }
+      .page.alt {
+        background: var(--paper2);
+      }
+      .ey {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--terra-aa);
+        font-weight: 600;
       }
       .bug {
         position: absolute;
         bottom: 12mm;
         left: 20mm;
-        font-size: 10px;
-        letter-spacing: 2px;
-        color: var(--mut);
+        font-family: var(--mono);
+        font-size: 9.5px;
+        letter-spacing: 0.12em;
+        color: var(--ink-faint);
         text-transform: uppercase;
       }
       .pg {
         position: absolute;
         bottom: 12mm;
         right: 20mm;
-        font-size: 10px;
-        letter-spacing: 2px;
-        color: var(--mut);
+        font-family: var(--mono);
+        font-size: 9.5px;
+        letter-spacing: 0.12em;
+        color: var(--ink-faint);
+      }
+      .hair {
+        height: 2px;
+        background: var(--gold);
+        border: 0;
       }
       /* cover */
       .cover {
@@ -70,165 +97,198 @@
       .wm {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 40px;
+        gap: 11px;
+        margin-bottom: 46px;
       }
       .dot {
-        width: 16px;
-        height: 16px;
+        width: 13px;
+        height: 13px;
         border-radius: 50%;
-        background: var(--brass);
-        box-shadow: 0 0 18px var(--brass);
+        background: var(--terra);
       }
       .wm span {
+        font-family: var(--display);
         font-weight: 800;
-        letter-spacing: 4px;
-        font-size: 18px;
+        letter-spacing: 0.5px;
+        font-size: 19px;
+        color: var(--ink);
       }
-      .kick {
-        color: var(--brass2);
-        font-weight: 800;
-        letter-spacing: 5px;
-        font-size: 15px;
-        text-transform: uppercase;
-        margin-bottom: 18px;
+      .cover .ey {
+        margin-bottom: 20px;
       }
       h1 {
-        font-size: 74px;
-        line-height: 0.98;
-        font-weight: 900;
+        font-family: var(--display);
+        font-size: 76px;
+        line-height: 0.96;
+        font-weight: 800;
         letter-spacing: -1.5px;
       }
       h1 em {
-        color: var(--brass);
-        font-style: normal;
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 600;
+        color: var(--terra);
+      }
+      .rule {
+        height: 3px;
+        width: 120px;
+        background: var(--terra);
+        border-radius: 3px;
+        margin: 30px 0 0;
       }
       .sub {
-        margin-top: 26px;
-        font-size: 21px;
-        color: #cfd3da;
+        margin-top: 28px;
+        font-size: 20px;
+        color: var(--ink-mute);
         max-width: 150mm;
-        line-height: 1.5;
+        line-height: 1.55;
       }
       .meta {
-        margin-top: 54px;
+        margin-top: 50px;
         display: flex;
-        gap: 14px;
+        gap: 12px;
         flex-wrap: wrap;
       }
       .chip {
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--rule);
+        background: rgba(0, 0, 0, 0.025);
         padding: 10px 18px;
         border-radius: 999px;
-        font-size: 14px;
-        color: #dfe3ea;
+        font-size: 13.5px;
+        color: var(--ink);
+        font-family: var(--mono);
       }
-      .rule {
-        height: 4px;
-        width: 120px;
-        background: linear-gradient(90deg, var(--brass2), var(--brass));
-        border-radius: 4px;
-        margin: 34px 0 0;
-      }
-      /* section divider */
+      /* divider */
       .div {
         display: flex;
         flex-direction: column;
         justify-content: center;
       }
       .div .no {
-        font-size: 130px;
-        font-weight: 900;
-        color: var(--brass);
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 140px;
+        font-weight: 600;
+        color: var(--terra);
         line-height: 1;
-        opacity: 0.95;
       }
       .div h2 {
-        font-size: 52px;
-        font-weight: 900;
+        font-family: var(--display);
+        font-size: 54px;
+        font-weight: 800;
         letter-spacing: -1px;
-        margin-top: 6px;
+        margin-top: 8px;
       }
       .div p {
         margin-top: 18px;
         font-size: 19px;
-        color: #cfd3da;
+        color: var(--ink-mute);
         max-width: 140mm;
         line-height: 1.55;
       }
-      /* play cards */
+      /* plays */
       .head2 {
-        font-size: 13px;
-        letter-spacing: 4px;
-        color: var(--brass2);
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        color: var(--terra-aa);
         text-transform: uppercase;
-        font-weight: 800;
-        margin-bottom: 22px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .head2-rule {
+        border: 0;
+        border-top: 1px solid var(--rule);
+        margin-bottom: 24px;
       }
       .play {
-        border-left: 4px solid var(--brass);
-        padding: 0 0 26px 20px;
-        margin-bottom: 26px;
+        border-left: 3px solid var(--terra);
+        padding: 0 0 24px 20px;
+        margin-bottom: 24px;
       }
       .play:last-of-type {
         margin-bottom: 0;
       }
       .play .n {
-        color: var(--brass);
-        font-weight: 900;
-        font-size: 15px;
-        letter-spacing: 2px;
+        font-family: var(--mono);
+        color: var(--terra-aa);
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.1em;
       }
       .play h3 {
+        font-family: var(--display);
         font-size: 25px;
-        font-weight: 800;
-        margin: 6px 0 9px;
+        font-weight: 700;
+        margin: 7px 0 9px;
         letter-spacing: -0.3px;
+        color: var(--ink);
       }
       .play p {
         font-size: 15.5px;
         line-height: 1.55;
-        color: #d6dae1;
+        color: var(--ink-mute);
       }
       .play b {
-        color: #fff;
+        color: var(--ink);
+        font-weight: 600;
       }
       /* CTA */
       .cta {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        text-align: left;
       }
       .cta h2 {
-        font-size: 46px;
-        font-weight: 900;
+        font-family: var(--display);
+        font-size: 48px;
+        font-weight: 800;
         letter-spacing: -1px;
-        line-height: 1.05;
+        line-height: 1.04;
+      }
+      .cta h2 em {
+        font-family: var(--serif);
+        font-style: italic;
+        font-weight: 600;
+        color: var(--terra);
       }
       .cta p {
         margin-top: 20px;
         font-size: 19px;
-        color: #cfd3da;
+        color: var(--ink-mute);
         max-width: 150mm;
         line-height: 1.55;
       }
       .btn {
-        margin-top: 34px;
+        margin-top: 32px;
         align-self: flex-start;
-        background: linear-gradient(90deg, var(--brass2), var(--brass));
-        color: #0b0b0c;
-        font-weight: 900;
+        background: var(--terra);
+        color: #fff;
+        font-family: var(--display);
+        font-weight: 800;
         font-size: 20px;
         padding: 18px 34px;
         border-radius: 12px;
-        letter-spacing: 0.3px;
+        letter-spacing: 0.2px;
+      }
+      .btn .u {
+        font-family: var(--mono);
+        font-weight: 600;
+        font-size: 15px;
+        opacity: 0.92;
+        display: block;
+        margin-top: 4px;
+      }
+      .or {
+        margin-top: 16px;
+        font-family: var(--mono);
+        font-size: 14px;
+        color: var(--ink-faint);
       }
       .small {
         margin-top: 30px;
-        font-size: 13px;
-        color: var(--mut);
+        font-size: 12.5px;
+        color: var(--ink-faint);
         line-height: 1.6;
       }
     </style>
@@ -238,9 +298,9 @@
     <section class="page cover">
       <div class="wm">
         <div class="dot"></div>
-        <span>SKYNETLABS</span>
+        <span>SkynetLabs</span>
       </div>
-      <div class="kick">The Free Kit</div>
+      <div class="ey">The Free Kit · skynetjoe.com</div>
       <h1>The Solo<br /><em>AI Agency</em><br />Kit</h1>
       <div class="rule"></div>
       <p class="sub">
@@ -248,15 +308,15 @@
         and the Claude Code workflow behind every reel on this page.
       </p>
       <div class="meta">
-        <div class="chip">⚡ 20 Agency Plays</div>
-        <div class="chip">🤖 10 Claude Code Power Moves</div>
+        <div class="chip">20 Agency Plays</div>
+        <div class="chip">10 Claude Code Power Moves</div>
         <div class="chip">No fluff · do-today</div>
       </div>
-      <div class="bug">SKYNETLABS · EDITED BY AI</div>
+      <div class="bug">SkynetLabs · skynetjoe.com</div>
     </section>
 
     <!-- DIVIDER 1 -->
-    <section class="page div">
+    <section class="page alt div">
       <div class="no">01</div>
       <h2>The Agency Playbook</h2>
       <p>
@@ -265,13 +325,14 @@
         fits.
       </p>
       <div class="rule"></div>
-      <div class="bug">SKYNETLABS · PART ONE</div>
+      <div class="bug">SkynetLabs · Part One</div>
       <div class="pg">02</div>
     </section>
 
     <!-- PLAYS 1-7 -->
     <section class="page">
       <div class="head2">Part One · Agency Playbook</div>
+      <hr class="head2-rule" />
       <div class="play">
         <div class="n">PLAY 01</div>
         <h3>Automation runs my back office</h3>
@@ -337,13 +398,14 @@
           selling a thing people can picture buying.
         </p>
       </div>
-      <div class="bug">SKYNETLABS · PART ONE</div>
+      <div class="bug">SkynetLabs · Part One</div>
       <div class="pg">03</div>
     </section>
 
     <!-- PLAYS 8-14 -->
     <section class="page">
       <div class="head2">Part One · Agency Playbook</div>
+      <hr class="head2-rule" />
       <div class="play">
         <div class="n">PLAY 08</div>
         <h3>New to Upwork? Read this</h3>
@@ -411,13 +473,14 @@
           the footprint now.
         </p>
       </div>
-      <div class="bug">SKYNETLABS · PART ONE</div>
+      <div class="bug">SkynetLabs · Part One</div>
       <div class="pg">04</div>
     </section>
 
     <!-- PLAYS 15-20 -->
     <section class="page">
       <div class="head2">Part One · Agency Playbook</div>
+      <hr class="head2-rule" />
       <div class="play">
         <div class="n">PLAY 15</div>
         <h3>This kills client retention</h3>
@@ -472,12 +535,12 @@
           on a light, consistent cadence — not in bursts.
         </p>
       </div>
-      <div class="bug">SKYNETLABS · PART ONE</div>
+      <div class="bug">SkynetLabs · Part One</div>
       <div class="pg">05</div>
     </section>
 
     <!-- DIVIDER 2 -->
-    <section class="page div">
+    <section class="page alt div">
       <div class="no">02</div>
       <h2>Claude Code<br />Power Moves</h2>
       <p>
@@ -485,13 +548,14 @@
         every reel, site, and automation in the agency actually gets built.
       </p>
       <div class="rule"></div>
-      <div class="bug">SKYNETLABS · PART TWO</div>
+      <div class="bug">SkynetLabs · Part Two</div>
       <div class="pg">06</div>
     </section>
 
     <!-- PLAYS 21-26 -->
     <section class="page">
       <div class="head2">Part Two · Claude Code Power Moves</div>
+      <hr class="head2-rule" />
       <div class="play">
         <div class="n">MOVE 21</div>
         <h3>CLAUDE.md is your memory</h3>
@@ -546,13 +610,14 @@
           enforces beat rules you have to remember.
         </p>
       </div>
-      <div class="bug">SKYNETLABS · PART TWO</div>
+      <div class="bug">SkynetLabs · Part Two</div>
       <div class="pg">07</div>
     </section>
 
     <!-- PLAYS 27-30 -->
     <section class="page">
       <div class="head2">Part Two · Claude Code Power Moves</div>
+      <hr class="head2-rule" />
       <div class="play">
         <div class="n">MOVE 27</div>
         <h3>Fan out across files</h3>
@@ -589,32 +654,36 @@
           attention goes to what actually matters.
         </p>
       </div>
-      <div class="bug">SKYNETLABS · PART TWO</div>
+      <div class="bug">SkynetLabs · Part Two</div>
       <div class="pg">08</div>
     </section>
 
     <!-- CTA -->
-    <section class="page cta">
+    <section class="page alt cta">
       <div class="wm">
         <div class="dot"></div>
-        <span>SKYNETLABS</span>
+        <span>SkynetLabs</span>
       </div>
-      <h2>
-        Want this run<br />on
-        <em style="color: var(--brass); font-style: normal">your</em> brand?
-      </h2>
+      <h2>Want this run<br />on <em>your</em> brand?</h2>
       <p>
         Everything in this kit — the automations, the content engine, the build
         workflow — is what SkynetLabs sets up for clients. If you'd rather have
         it done than do it, that's the work.
       </p>
-      <div class="btn">Comment “AI” or DM us to start</div>
+      <div class="btn">
+        Book a free discovery call<span class="u"
+          >skynetjoe.com/discovery-call</span
+        >
+      </div>
+      <div class="or">
+        — or comment “AI” on the reel and grab the pinned link —
+      </div>
       <p class="small">
-        Built &amp; edited with AI by SkynetLabs · This kit shares tactics we
-        actually run; results depend on your niche and effort. No guarantees,
-        just the playbook.
+        Built &amp; edited with AI by SkynetLabs · skynetjoe.com · This kit
+        shares tactics we actually run; results depend on your niche and effort.
+        No guarantees, just the playbook.
       </p>
-      <div class="bug">SKYNETLABS · THE SOLO AI AGENCY KIT</div>
+      <div class="bug">SkynetLabs · The Solo AI Agency Kit</div>
     </section>
   </body>
 </html>
