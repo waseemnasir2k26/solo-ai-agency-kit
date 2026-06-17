@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Solo AI Agency Kit — SkynetLabs</title>
+    <style>
+      :root {
+        --ink: #0b0b0c;
+        --paper: #0e0f12;
+        --brass: #c9a23f;
+        --brass2: #e7c766;
+        --mut: #9aa0aa;
+        --line: rgba(255, 255, 255, 0.1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      body {
+        font-family: "Segoe UI", system-ui, Arial, sans-serif;
+        color: #eef0f3;
+        background: var(--ink);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 22mm 20mm;
+        position: relative;
+        page-break-after: always;
+        overflow: hidden;
+        background: radial-gradient(
+          120% 90% at 50% 0%,
+          #16181d 0%,
+          #0b0b0c 60%
+        );
+      }
+      .page:last-child {
+        page-break-after: auto;
+      }
+      .bug {
+        position: absolute;
+        bottom: 12mm;
+        left: 20mm;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--mut);
+        text-transform: uppercase;
+      }
+      .pg {
+        position: absolute;
+        bottom: 12mm;
+        right: 20mm;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--mut);
+      }
+      /* cover */
+      .cover {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .wm {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 40px;
+      }
+      .dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--brass);
+        box-shadow: 0 0 18px var(--brass);
+      }
+      .wm span {
+        font-weight: 800;
+        letter-spacing: 4px;
+        font-size: 18px;
+      }
+      .kick {
+        color: var(--brass2);
+        font-weight: 800;
+        letter-spacing: 5px;
+        font-size: 15px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+      h1 {
+        font-size: 74px;
+        line-height: 0.98;
+        font-weight: 900;
+        letter-spacing: -1.5px;
+      }
+      h1 em {
+        color: var(--brass);
+        font-style: normal;
+      }
+      .sub {
+        margin-top: 26px;
+        font-size: 21px;
+        color: #cfd3da;
+        max-width: 150mm;
+        line-height: 1.5;
+      }
+      .meta {
+        margin-top: 54px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-size: 14px;
+        color: #dfe3ea;
+      }
+      .rule {
+        height: 4px;
+        width: 120px;
+        background: linear-gradient(90deg, var(--brass2), var(--brass));
+        border-radius: 4px;
+        margin: 34px 0 0;
+      }
+      /* section divider */
+      .div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .div .no {
+        font-size: 130px;
+        font-weight: 900;
+        color: var(--brass);
+        line-height: 1;
+        opacity: 0.95;
+      }
+      .div h2 {
+        font-size: 52px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        margin-top: 6px;
+      }
+      .div p {
+        margin-top: 18px;
+        font-size: 19px;
+        color: #cfd3da;
+        max-width: 140mm;
+        line-height: 1.55;
+      }
+      /* play cards */
+      .head2 {
+        font-size: 13px;
+        letter-spacing: 4px;
+        color: var(--brass2);
+        text-transform: uppercase;
+        font-weight: 800;
+        margin-bottom: 22px;
+      }
+      .play {
+        border-left: 4px solid var(--brass);
+        padding: 0 0 26px 20px;
+        margin-bottom: 26px;
+      }
+      .play:last-of-type {
+        margin-bottom: 0;
+      }
+      .play .n {
+        color: var(--brass);
+        font-weight: 900;
+        font-size: 15px;
+        letter-spacing: 2px;
+      }
+      .play h3 {
+        font-size: 25px;
+        font-weight: 800;
+        margin: 6px 0 9px;
+        letter-spacing: -0.3px;
+      }
+      .play p {
+        font-size: 15.5px;
+        line-height: 1.55;
+        color: #d6dae1;
+      }
+      .play b {
+        color: #fff;
+      }
+      /* CTA */
+      .cta {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+      }
+      .cta h2 {
+        font-size: 46px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        line-height: 1.05;
+      }
+      .cta p {
+        margin-top: 20px;
+        font-size: 19px;
+        color: #cfd3da;
+        max-width: 150mm;
+        line-height: 1.55;
+      }
+      .btn {
+        margin-top: 34px;
+        align-self: flex-start;
+        background: linear-gradient(90deg, var(--brass2), var(--brass));
+        color: #0b0b0c;
+        font-weight: 900;
+        font-size: 20px;
+        padding: 18px 34px;
+        border-radius: 12px;
+        letter-spacing: 0.3px;
+      }
+      .small {
+        margin-top: 30px;
+        font-size: 13px;
+        color: var(--mut);
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- COVER -->
+    <section class="page cover">
+      <div class="wm">
+        <div class="dot"></div>
+        <span>SKYNETLABS</span>
+      </div>
+      <div class="kick">The Free Kit</div>
+      <h1>The Solo<br /><em>AI Agency</em><br />Kit</h1>
+      <div class="rule"></div>
+      <p class="sub">
+        30 plays I actually run to ship client work with AI — the agency moves
+        and the Claude Code workflow behind every reel on this page.
+      </p>
+      <div class="meta">
+        <div class="chip">⚡ 20 Agency Plays</div>
+        <div class="chip">🤖 10 Claude Code Power Moves</div>
+        <div class="chip">No fluff · do-today</div>
+      </div>
+      <div class="bug">SKYNETLABS · EDITED BY AI</div>
+    </section>
+
+    <!-- DIVIDER 1 -->
+    <section class="page div">
+      <div class="no">01</div>
+      <h2>The Agency Playbook</h2>
+      <p>
+        Twenty things that moved the needle for a one-person AI agency —
+        pricing, getting clients, killing busywork, and keeping them. Steal what
+        fits.
+      </p>
+      <div class="rule"></div>
+      <div class="bug">SKYNETLABS · PART ONE</div>
+      <div class="pg">02</div>
+    </section>
+
+    <!-- PLAYS 1-7 -->
+    <section class="page">
+      <div class="head2">Part One · Agency Playbook</div>
+      <div class="play">
+        <div class="n">PLAY 01</div>
+        <h3>Automation runs my back office</h3>
+        <p>
+          Pick the three jobs you redo every week —
+          <b>invoicing, client onboarding, weekly reports</b> — and wire each as
+          one n8n flow. Back-office first, because it pays you back every single
+          week without touching delivery.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 02</div>
+        <h3>Stop paying for Zapier</h3>
+        <p>
+          Most paid Zaps are a webhook, a filter, and an API call. Rebuild them
+          as <b>self-hosted n8n</b> nodes. Same outcome, no per-task tax — the
+          bill stops scaling with your volume.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 03</div>
+        <h3>AI agencies are simpler than you think</h3>
+        <p>
+          One niche, one offer, one repeatable workflow. Complexity is where
+          solo agencies die.
+          <b>Sell the same outcome to the same buyer</b> until the system is
+          boring — then scale it.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 04</div>
+        <h3>I charged too little</h3>
+        <p>
+          Price the <b>outcome, not the hours</b>. "A booking system that fills
+          your calendar" is worth far more than "12 hours of setup." Anchor
+          high, then let the package justify it.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 05</div>
+        <h3>One change to my proposals</h3>
+        <p>
+          Open with <b>their</b> result, not your bio. First line = the problem
+          they typed, restated sharper, plus the outcome you'll deliver. Save
+          the credentials for the bottom.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 06</div>
+        <h3>ChatGPT got this wrong</h3>
+        <p>
+          AI is the intern, you're the QA. <b>Never ship raw output.</b> The
+          agencies that win treat the model as a fast first draft and put a
+          human checkpoint on everything client-facing.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 07</div>
+        <h3>Stuck building cheap sites</h3>
+        <p>
+          Escape the race to the bottom by <b>productizing</b>: a named package,
+          a fixed scope, a clear result. You stop selling hours and start
+          selling a thing people can picture buying.
+        </p>
+      </div>
+      <div class="bug">SKYNETLABS · PART ONE</div>
+      <div class="pg">03</div>
+    </section>
+
+    <!-- PLAYS 8-14 -->
+    <section class="page">
+      <div class="head2">Part One · Agency Playbook</div>
+      <div class="play">
+        <div class="n">PLAY 08</div>
+        <h3>New to Upwork? Read this</h3>
+        <p>
+          Structure every proposal:
+          <b
+            >mirror their words → one proof → 2 sharp questions → presumptive
+            CTA</b
+          >. Questions make you a consultant, not a vendor — and they get
+          replies.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 09</div>
+        <h3>Your first automation is simple</h3>
+        <p>
+          Don't boil the ocean. Take <b>one</b> task you do by hand today, map
+          the trigger and the steps, automate just that. One working flow beats
+          a grand plan that never ships.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 10</div>
+        <h3>Cold outreach that actually works</h3>
+        <p>
+          Personalized first line, one piece of proof, a <b>soft</b> CTA ("worth
+          a quick look?"). Volume without relevance gets ignored — relevance
+          without a clear ask gets nowhere.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 11</div>
+        <h3>My AI stack killed busywork</h3>
+        <p>
+          The core: <b>Claude Code</b> for build + content, <b>n8n</b> for
+          automation, one CRM for follow-up. Few tools, deeply used, beats a
+          graveyard of half-set-up apps.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 12</div>
+        <h3>I almost quit my agency</h3>
+        <p>
+          The fix was <b>niching down</b>. Doing everything for everyone burned
+          me out and confused buyers. One niche made marketing, pricing, and
+          delivery click into place.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 13</div>
+        <h3>The pricing advice I ignored</h3>
+        <p>
+          <b>Retainers over one-offs.</b> Recurring revenue turns the
+          feast-or-famine cycle into a baseline. Build the one-off, then convert
+          it into a "keep it running" monthly.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 14</div>
+        <h3>AEO isn't what you think</h3>
+        <p>
+          It's early and unhyped: making your business
+          <b>findable when people ask an AI</b>, not just Google. Clean
+          structured info, real third-party presence, consistent facts. Build
+          the footprint now.
+        </p>
+      </div>
+      <div class="bug">SKYNETLABS · PART ONE</div>
+      <div class="pg">04</div>
+    </section>
+
+    <!-- PLAYS 15-20 -->
+    <section class="page">
+      <div class="head2">Part One · Agency Playbook</div>
+      <div class="play">
+        <div class="n">PLAY 15</div>
+        <h3>This kills client retention</h3>
+        <p>
+          Silence. Clients churn when they can't <b>see</b> the value. A simple
+          monthly "here's what we did + what's next" keeps a result-delivering
+          retainer alive far longer than the work alone.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 16</div>
+        <h3>One node replaced a paid tool</h3>
+        <p>
+          Before you buy another SaaS, ask if it's <b>one n8n node</b>.
+          Form-to-sheet, notify-on-event, scrape-and-send — a lot of monthly
+          tools are a single step you already own.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 17</div>
+        <h3>AI won't replace you</h3>
+        <p>
+          The person <b>wielding</b> AI replaces the person who won't. Judgment,
+          taste, and client trust are the moat. Use the model to move faster,
+          not to think for you.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 18</div>
+        <h3>Still doing invoices by hand?</h3>
+        <p>
+          Trigger → template → send → log, all automated. Invoicing is the
+          cleanest first automation: clear rules, real time saved, and it
+          <b>pays you</b> to set up.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 19</div>
+        <h3>Scaling is brutal</h3>
+        <p>
+          <b>Systems before people.</b> Document and automate the repeatable
+          parts first. Hiring into chaos just multiplies the chaos — hiring into
+          a system multiplies output.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">PLAY 20</div>
+        <h3>3 ways to get clients</h3>
+        <p>
+          <b>Referrals</b> (ask every happy client), <b>content</b> (show the
+          work in public), <b>outreach</b> (targeted, proof-led). Run all three
+          on a light, consistent cadence — not in bursts.
+        </p>
+      </div>
+      <div class="bug">SKYNETLABS · PART ONE</div>
+      <div class="pg">05</div>
+    </section>
+
+    <!-- DIVIDER 2 -->
+    <section class="page div">
+      <div class="no">02</div>
+      <h2>Claude Code<br />Power Moves</h2>
+      <p>
+        The ten workflow moves that let one person ship like a team. This is how
+        every reel, site, and automation in the agency actually gets built.
+      </p>
+      <div class="rule"></div>
+      <div class="bug">SKYNETLABS · PART TWO</div>
+      <div class="pg">06</div>
+    </section>
+
+    <!-- PLAYS 21-26 -->
+    <section class="page">
+      <div class="head2">Part Two · Claude Code Power Moves</div>
+      <div class="play">
+        <div class="n">MOVE 21</div>
+        <h3>CLAUDE.md is your memory</h3>
+        <p>
+          Put the facts that are <b>always true</b> — stack, conventions, deploy
+          gotchas — in a CLAUDE.md at the repo root. The agent reads it every
+          session, so you stop re-explaining your project.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">MOVE 22</div>
+        <h3>Use the plan-mode gate</h3>
+        <p>
+          Before any multi-file or billable change, make it
+          <b>plan first, execute after approval</b>. The plan is your sign-off
+          and your spec — it catches wrong turns before they cost you.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">MOVE 23</div>
+        <h3>Give Claude a check</h3>
+        <p>
+          Have a <b>separate</b> agent grade the work against a rubric before it
+          ships — the builder shouldn't mark its own homework. An independent
+          critic pass kills the "looks done but isn't" bug.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">MOVE 24</div>
+        <h3>Subagents save your context</h3>
+        <p>
+          Push research and big searches into <b>subagents</b>. They burn their
+          own context and hand you back the conclusion, so your main thread
+          stays clean and on-task for longer.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">MOVE 25</div>
+        <h3>Turn a prompt into a skill</h3>
+        <p>
+          Any workflow you'd paste twice becomes a <b>reusable skill</b> — name,
+          triggers, steps. You stop re-prompting from scratch and start running
+          a house procedure on command.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">MOVE 26</div>
+        <h3>Hooks are guardrails</h3>
+        <p>
+          Wire <b>hooks</b> to enforce the rules automatically — block a risky
+          command, inject context, run a check on save. Guardrails the harness
+          enforces beat rules you have to remember.
+        </p>
+      </div>
+      <div class="bug">SKYNETLABS · PART TWO</div>
+      <div class="pg">07</div>
+    </section>
+
+    <!-- PLAYS 27-30 -->
+    <section class="page">
+      <div class="head2">Part Two · Claude Code Power Moves</div>
+      <div class="play">
+        <div class="n">MOVE 27</div>
+        <h3>Fan out across files</h3>
+        <p>
+          Independent subtasks on <b>disjoint files</b>? Launch them in parallel
+          in one message. Work that took an afternoon in sequence collapses to
+          one pass of wall-clock time.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">MOVE 28</div>
+        <h3>Run parallel worktrees</h3>
+        <p>
+          Give each parallel agent its own <b>git worktree</b> so they never
+          collide. Isolated branches mean one agent's crash can't take down the
+          others — and every change is a clean, revertable unit.
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">MOVE 29</div>
+        <h3>Checkpoints &amp; rewind</h3>
+        <p>
+          Experiment fearlessly: <b>checkpoint</b> before a risky change and
+          rewind if it goes sideways. Safe undo turns "I hope this works" into
+          "let's just try it."
+        </p>
+      </div>
+      <div class="play">
+        <div class="n">MOVE 30</div>
+        <h3>Headless CI review</h3>
+        <p>
+          Run the agent <b>headless</b> to review every PR before a human looks.
+          Automated first-pass review catches the obvious stuff so your
+          attention goes to what actually matters.
+        </p>
+      </div>
+      <div class="bug">SKYNETLABS · PART TWO</div>
+      <div class="pg">08</div>
+    </section>
+
+    <!-- CTA -->
+    <section class="page cta">
+      <div class="wm">
+        <div class="dot"></div>
+        <span>SKYNETLABS</span>
+      </div>
+      <h2>
+        Want this run<br />on
+        <em style="color: var(--brass); font-style: normal">your</em> brand?
+      </h2>
+      <p>
+        Everything in this kit — the automations, the content engine, the build
+        workflow — is what SkynetLabs sets up for clients. If you'd rather have
+        it done than do it, that's the work.
+      </p>
+      <div class="btn">Comment “AI” or DM us to start</div>
+      <p class="small">
+        Built &amp; edited with AI by SkynetLabs · This kit shares tactics we
+        actually run; results depend on your niche and effort. No guarantees,
+        just the playbook.
+      </p>
+      <div class="bug">SKYNETLABS · THE SOLO AI AGENCY KIT</div>
+    </section>
+  </body>
+</html>
