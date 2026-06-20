@@ -3,186 +3,53 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Solo AI Agency Kit — SkynetLabs</title>
-    <meta
-      name="description"
-      content="30 plays to run a one-person AI agency — 20 agency moves + 10 Claude Code workflow tactics. Free PDF from SkynetLabs."
-    />
-    <meta property="og:title" content="The Solo AI Agency Kit — 30 plays" />
-    <meta
-      property="og:description"
-      content="Free PDF: 20 agency plays + 10 Claude Code power moves. The workflow behind every SkynetLabs reel."
-    />
-    <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Edit Videos with Claude — SkynetLabs</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
-      rel="stylesheet"
+      rel="canonical"
+      href="https://skynetjoe.com/edit-videos-with-claude"
     />
+    <meta name="robots" content="noindex" />
+    <!-- Redirect: kit funnel consolidated into the edit-videos-with-claude page -->
+    <meta
+      http-equiv="refresh"
+      content="0; url=https://skynetjoe.com/edit-videos-with-claude"
+    />
+    <script>
+      window.location.replace(
+        "https://skynetjoe.com/edit-videos-with-claude" +
+          window.location.search +
+          window.location.hash,
+      );
+    </script>
     <style>
-      :root {
-        --paper: #f2efe6;
-        --ink: #1a1a1a;
-        --ink-mute: #56564f;
-        --ink-faint: #7a766c;
-        --terra: #c66b3f;
-        --terra-aa: #a8451f;
-        --gold: #b99657;
-        --rule: rgba(26, 26, 26, 0.13);
-        --display: "Bricolage Grotesque", system-ui, sans-serif;
-        --serif: "Fraunces", Georgia, serif;
-        --sans: "Inter", system-ui, sans-serif;
-        --mono: "IBM Plex Mono", monospace;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
       body {
-        font-family: var(--sans);
-        background: var(--paper);
-        color: var(--ink);
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: #faf7f0;
+        color: #1a1a1a;
+        display: flex;
         min-height: 100vh;
-        display: flex;
         align-items: center;
         justify-content: center;
-        padding: 32px;
-      }
-      .card {
-        max-width: 620px;
+        margin: 0;
         text-align: center;
+        padding: 1.5rem;
       }
-      .wm {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 26px;
-      }
-      .dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: var(--terra);
-      }
-      .wm span {
-        font-family: var(--display);
-        font-weight: 800;
-        letter-spacing: 0.5px;
-        font-size: 17px;
-      }
-      .kicker {
-        font-family: var(--mono);
-        font-size: 12.5px;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--terra-aa);
+      a {
+        color: #d97757;
         font-weight: 600;
-        margin-bottom: 16px;
-      }
-      h1 {
-        font-family: var(--display);
-        font-size: clamp(34px, 7vw, 52px);
-        line-height: 1.02;
-        font-weight: 800;
-        letter-spacing: -1px;
-        margin-bottom: 16px;
-      }
-      h1 .amber {
-        font-family: var(--serif);
-        font-style: italic;
-        font-weight: 600;
-        color: var(--terra);
-      }
-      p.sub {
-        font-size: 17px;
-        color: var(--ink-mute);
-        line-height: 1.55;
-        margin-bottom: 32px;
-      }
-      .btn {
-        display: inline-block;
-        background: var(--terra);
-        color: #fff;
-        font-family: var(--display);
-        font-weight: 800;
-        font-size: 18px;
-        text-decoration: none;
-        padding: 17px 36px;
-        border-radius: 40px;
-        transition:
-          transform 0.12s ease,
-          filter 0.12s ease;
-      }
-      .btn:hover {
-        transform: translateY(-2px);
-        filter: brightness(1.06);
-      }
-      .chips {
-        margin-top: 28px;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .chip {
-        border: 1px solid var(--rule);
-        background: rgba(0, 0, 0, 0.025);
-        padding: 8px 16px;
-        border-radius: 999px;
-        font-size: 12.5px;
-        color: var(--ink);
-        font-family: var(--mono);
-      }
-      .meta {
-        margin-top: 22px;
-        font-family: var(--mono);
-        font-size: 12.5px;
-        color: var(--ink-faint);
-      }
-      .foot {
-        margin-top: 40px;
-        font-size: 12.5px;
-        color: var(--ink-faint);
-        letter-spacing: 0.02em;
-      }
-      a.brand {
-        color: var(--terra-aa);
-        text-decoration: none;
-        font-weight: 700;
       }
     </style>
   </head>
   <body>
-    <div class="card">
-      <div class="wm">
-        <div class="dot"></div>
-        <span>SkynetLabs</span>
-      </div>
-      <div class="kicker">Free kit · skynetjoe.com · no email needed</div>
-      <h1>Run a one-person<br /><span class="amber">AI agency.</span></h1>
-      <p class="sub">
-        30 plays I actually run to ship client work with AI — 20 agency moves
-        (pricing, clients, automation, retention) plus the 10 Claude Code
-        workflow tactics behind every reel. One PDF. Take what fits.
-      </p>
-      <a class="btn" href="SkynetLabs-Solo-AI-Agency-Kit.pdf" download
-        >↓ Download the free PDF</a
-      >
-      <div class="chips">
-        <div class="chip">20 Agency Plays</div>
-        <div class="chip">10 Claude Code Moves</div>
-        <div class="chip">9-page A4 · PDF</div>
-      </div>
-      <div class="meta">
-        Want it done for you? → skynetjoe.com/discovery-call
-      </div>
-      <div class="foot">
-        From <a class="brand" href="https://skynetjoe.com">SkynetLabs</a> · —
-        built &amp; edited with AI —
-      </div>
-    </div>
+    <p>
+      Taking you to the prompts…<br />
+      If nothing happens,
+      <a href="https://skynetjoe.com/edit-videos-with-claude">tap here</a>.
+    </p>
   </body>
 </html>
